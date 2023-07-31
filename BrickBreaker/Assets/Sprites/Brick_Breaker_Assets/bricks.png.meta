@@ -43,11 +43,11 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 10
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -483,7 +483,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: brick_solid
+      name: brick_solid1
       rect:
         serializedVersion: 2
         x: 112
@@ -504,7 +504,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: brick_cracked
+      name: brick_cracked1
       rect:
         serializedVersion: 2
         x: 144
@@ -525,7 +525,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: brick_broken
+      name: brick_broken1
       rect:
         serializedVersion: 2
         x: 176
@@ -609,7 +609,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bricks_24
+      name: brick_solid
       rect:
         serializedVersion: 2
         x: 112
@@ -630,7 +630,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bricks_25
+      name: brick_cracked
       rect:
         serializedVersion: 2
         x: 144
@@ -651,7 +651,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bricks_26
+      name: brick_broken
       rect:
         serializedVersion: 2
         x: 176
@@ -1124,17 +1124,19 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       bricks_7: -1022301252
-      bricks_26: 946348764
-      brick_solid: -1785043927
+      brick_solid: 1935720040
       bricks_10: -1738915690
+      brick_solid1: -1785043927
       bricks_21: -1938160811
-      brick_broken: -63422578
+      brick_broken1: -63422578
+      brick_broken: 946348764
       bricks_42: -1138931541
       bricks_16: -121315595
       bricks_11: -97664550
       bricks_34: 1333197046
       bricks_37: 1500999688
       bricks_36: -785894601
+      brick_cracked1: -818525162
       bricks_27: 483117976
       bricks_39: -171183521
       bricks_32: 209802218
@@ -1144,9 +1146,7 @@ TextureImporter:
       bricks_4: 1016382817
       bricks_43: -1078554601
       bricks_14: 848749091
-      bricks_25: -25705243
       bricks_30: -119536428
-      bricks_24: 1935720040
       bricks_47: -1695642666
       bricks_2: -309437947
       bricks_3: 425295634
@@ -1164,13 +1164,13 @@ TextureImporter:
       bricks_44: 232461877
       bricks_8: -1258141419
       bricks_45: -195309054
+      bricks_41: 16657339
       bricks_1: 1357107385
       bricks_33: -2035945144
-      bricks_41: 16657339
       bricks_22: 200286095
       bricks_13: -1069176034
       bricks_9: 1381703258
-      brick_cracked: -818525162
+      brick_cracked: -25705243
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

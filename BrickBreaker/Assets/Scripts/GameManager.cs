@@ -6,6 +6,8 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    //events
+    
     //prefabs
     public GameObject ballPrefab;
     public GameObject paddlePrefab;
@@ -53,11 +55,52 @@ public class GameManager : MonoBehaviour
         set { _level = value; levelText.text=(_level+1).ToString(); }
     }
     
-    //functions
+    //clicked-functions
 
-    public void  PlayClicked() {
+    public void  InitClicked() {
         SwitchState(State.INIT);
     }
+
+    public void  PlayClicked() {
+        SwitchState(State.LOADLEVEL);
+    }
+
+    public void  MainMenu() {
+         SwitchState(State.MENU);
+    }
+
+    //event-functions
+
+    public void  CheckLevelCompleted() {
+        StartCoroutine(RaiseDelay());
+    }
+
+     IEnumerator RaiseDelay(){
+        yield return new WaitForSeconds(0.5f);
+        if( _currentLevel !=null && _currentLevel.transform.childCount == 0){
+            SwitchState(State.LEVELCOMPLETED);
+        }
+    }
+
+    public void ChangePlayerBall() {
+        Balls--;  
+        _currentBall=null;
+        if(_currentBall==null){
+            if(Balls>0){
+            _currentBall=Instantiate(ballPrefab);
+            }
+            else{
+                SwitchState(State.GAMEOVER);
+            }
+        }  
+       
+    }
+
+    public void ChangeScore() {
+        Score+=50;
+    }
+
+
     private void Awake() {
         //DontDestroyOnLoad(this.gameObject);
     }
@@ -83,10 +126,8 @@ public class GameManager : MonoBehaviour
                 panelStartMenu.SetActive(true);
                 break;
             case State.INIT:
-                panelPlay.SetActive(true);
                 Score=0;
                 Level=0;
-                Balls=3;
                 _currentPaddle = Instantiate(paddlePrefab);
                 SwitchState(State.LOADLEVEL);
                 break;
@@ -100,48 +141,20 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case State.PLAY:
+                panelPlay.SetActive(true);
                 Cursor.visible = false;
                 Balls=3;
+                Instantiate(ballPrefab);
                 break;
             case State.LEVELCOMPLETED:
                 Destroy(_currentBall);
                 Destroy(_currentLevel);
                 Level++;
-                SwitchState(State.LOADLEVEL,2f);
                 panelCompleted.SetActive(true);
                 break;
             case State.GAMEOVER:
                 panelGameOver.SetActive(true);
-                break;
-
-        }
-    }
-
-    private void Update() {
-        switch (_state)
-        {
-            case State.MENU:
-                break;
-            case State.INIT:               
-                break;
-            case State.LOADLEVEL:
-                break;
-            case State.PLAY:
-                if(_currentBall==null){
-                    if(Balls>0){
-                        _currentBall = Instantiate(ballPrefab);
-                    }
-                    else{
-                        SwitchState(State.GAMEOVER);
-                    }
-                }
-                if(_currentLevel !=null && _currentLevel.transform.childCount == 0){
-                    SwitchState(State.LEVELCOMPLETED);
-                }
-                break;
-            case State.LEVELCOMPLETED:
-                break;
-            case State.GAMEOVER:
+                Score=0;
                 break;
 
         }
@@ -159,7 +172,8 @@ public class GameManager : MonoBehaviour
             case State.LOADLEVEL:
                 break;
             case State.PLAY:
-            Cursor.visible = true;
+                Cursor.visible = true;
+                panelPlay.SetActive(false);
                 break;
             case State.LEVELCOMPLETED:
                 panelCompleted.SetActive(false);

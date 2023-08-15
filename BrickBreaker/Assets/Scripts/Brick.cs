@@ -6,9 +6,11 @@ public class Brick : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer {get; private set;}
     public int health {get; private set;}
-    public int points =120;
     public Sprite[] states;
-    GameManager _gameManager;
+
+    [Header("Events")]
+    public GameEvent onScoreChanged;
+    public GameEvent onCheckLevel;
 
     private void Awake() {
         this.spriteRenderer = GetComponent<SpriteRenderer>();
@@ -17,21 +19,22 @@ public class Brick : MonoBehaviour
     private void Start() {
         this.health = this.states.Length;
         this.spriteRenderer.sprite = this.states[this.health-1];
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void  Hit() {
        
-        _gameManager.Score+= points/health;
+        onScoreChanged.Raise();
         this.health--;
 
         
         if(this.health<=0){
             Destroy(this.gameObject);
+            onCheckLevel.Raise();
         }else{
             this.spriteRenderer.sprite = this.states[this.health-1];
         }
     }
+
     
     private void OnCollisionEnter2D(Collision2D collision) {
         Hit();

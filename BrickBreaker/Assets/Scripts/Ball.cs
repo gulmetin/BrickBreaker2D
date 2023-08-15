@@ -7,15 +7,15 @@ public class Ball : MonoBehaviour
     public float _speed =8f;
     Rigidbody2D _rigidbody;
     Vector2 _velocity;
-    GameManager _gameManager;
     SpriteRenderer _renderer;
+
+    [Header("Events")]
+    public GameEvent onPlayerBallChanged;
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
         Invoke("Launch",1f);
     }
 
@@ -29,8 +29,8 @@ public class Ball : MonoBehaviour
         _velocity = _rigidbody.velocity;
 
         if(!_renderer.isVisible){
-            _gameManager.Balls--;
             Destroy(gameObject);
+            onPlayerBallChanged.Raise();
         }
     }
 

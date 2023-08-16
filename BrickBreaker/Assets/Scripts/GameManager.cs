@@ -131,6 +131,9 @@ public class GameManager : MonoBehaviour
             case State.INIT:
                 Score=0;
                 Level=0;
+                if(_currentPaddle != null){
+                    Destroy(_currentPaddle);
+                }
                 _currentPaddle = Instantiate(paddlePrefab);
                 SwitchState(State.LOADLEVEL);
                 break;
@@ -157,6 +160,8 @@ public class GameManager : MonoBehaviour
                 panelCompleted.SetActive(true);
                 break;
             case State.GAMEOVER:
+                Destroy(_currentBall);
+                Destroy(_currentLevel);
                 PlayerPrefs.SetInt("score",Score);
                 if(Score>PlayerPrefs.GetInt("highscore")){
                     PlayerPrefs.SetInt("highscore",Score);

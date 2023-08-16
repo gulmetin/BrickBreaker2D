@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text ballsText;
     public TMP_Text levelText;
 
+    public TMP_Text highscoreText;
+
     //panels
     public GameObject panelStartMenu;
     public GameObject panelPlay;
@@ -66,7 +68,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void  MainMenu() {
-         SwitchState(State.MENU);
+        SwitchState(State.MENU);
     }
 
     //event-functions
@@ -123,6 +125,7 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case State.MENU:
+            highscoreText.text = "HIGH SCORE :"+ PlayerPrefs.GetInt("highscore").ToString();
                 panelStartMenu.SetActive(true);
                 break;
             case State.INIT:
@@ -147,12 +150,17 @@ public class GameManager : MonoBehaviour
                 Instantiate(ballPrefab);
                 break;
             case State.LEVELCOMPLETED:
+                PlayerPrefs.SetInt("highscore",Score);
                 Destroy(_currentBall);
                 Destroy(_currentLevel);
                 Level++;
                 panelCompleted.SetActive(true);
                 break;
             case State.GAMEOVER:
+                PlayerPrefs.SetInt("score",Score);
+                if(Score>PlayerPrefs.GetInt("highscore")){
+                    PlayerPrefs.SetInt("highscore",Score);
+                }
                 panelGameOver.SetActive(true);
                 Score=0;
                 break;
